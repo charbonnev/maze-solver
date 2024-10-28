@@ -2,20 +2,25 @@ from window import Window
 from shapes import Line, Point
 from cell import Cell
 from maze import Maze
+import random as r
 
 draw_some_lines = False
 draw_some_cells = False
 draw_test_maze = True
 
+import os
+seed = int.from_bytes(os.urandom(8), 'big')
+
 def main():
     win = Window(800,600)
-    c_w = 50
-    c_h = 50
+    c_w = 20
+    c_h = 20
     
     if draw_test_maze:
-        maze = Maze(50, 50, 10, 10, c_w, c_h, win)
+        maze = Maze(20, 20, 25, 35, c_w, c_h, win, seed)
         maze._draw_cells()
         maze._break_entrance_and_exit()
+        maze._break_walls()
     
     if draw_some_cells:
         cell = Cell(50, 50, 150, 150, win)
