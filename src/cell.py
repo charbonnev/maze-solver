@@ -3,7 +3,7 @@ from window import Window
 
 class Cell:
 
-    def __init__(self, x1, y1, x2, y2, window : Window):
+    def __init__(self, x1, y1, x2, y2, window : Window = None):
         self._x1 = x1
         self._y1 = y1
         self._x2 = x2
