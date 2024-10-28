@@ -15,18 +15,28 @@ class Cell:
         self.has_bottom_wall = True
         
     def draw(self):
+        if not self._window:
+            return
         top_right = Point(self._x2, self._y1)
         bottom_right = Point(self._x2, self._y2)
         bottom_left = Point(self._x1, self._y2)
         top_left = Point(self._x1, self._y1)
         if self.has_left_wall:
             self._window.draw_line(Line(top_left, bottom_left), "black")
+        else:
+            self._window.draw_line(Line(top_left, bottom_left), "white")
         if self.has_right_wall:
             self._window.draw_line(Line(top_right, bottom_right), "black")
+        else:
+            self._window.draw_line(Line(top_right, bottom_right), "white")
         if self.has_top_wall:
             self._window.draw_line(Line(top_left, top_right), "black")
+        else:
+            self._window.draw_line(Line(top_left, top_right), "white")
         if self.has_bottom_wall:
             self._window.draw_line(Line(bottom_right, bottom_left), "black")
+        else:
+            self._window.draw_line(Line(bottom_right, bottom_left), "white")
             
     def draw_move(self, to_cell, undo=False):
         my_center = Point((self._x1 + self._x2) / 2, (self._y1 + self._y2) / 2)

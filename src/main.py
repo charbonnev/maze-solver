@@ -5,7 +5,7 @@ from maze import Maze
 
 draw_some_lines = False
 draw_some_cells = False
-draw_test_maze = False
+draw_test_maze = True
 
 def main():
     win = Window(800,600)
@@ -15,6 +15,7 @@ def main():
     if draw_test_maze:
         maze = Maze(50, 50, 10, 10, c_w, c_h, win)
         maze._draw_cells()
+        maze._break_entrance_and_exit()
     
     if draw_some_cells:
         cell = Cell(50, 50, 150, 150, win)
