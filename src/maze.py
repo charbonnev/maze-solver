@@ -96,4 +96,26 @@ class Maze:
         return self._solve_r(0, 0)
     
     def _solve_r(self, i: int, j: int):
-        pass
+        self._animate()
+        self._cells[i][j].visited = True
+        if i == self._num_cols - 1 and j == self._num_rows - 1:
+            return True
+        for (di, dj) in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            if i + di < 0 or i + di >= self._num_cols or j + dj < 0 or j + dj >= self._num_rows:
+                continue # out of bounds, try next direction
+            if self._cells[i][j].has_left_wall and di == -1:
+                continue # there's a left wall blocking us
+            if self._cells[i][j].has_right_wall and di == 1:
+                continue # there's a right wall blocking us
+            if self._cells[i][j].has_top_wall and dj == -1:
+                continue # there's a top wall blocking us
+            if self._cells[i][j].has_bottom_wall and dj == 1:
+                continue # there's a bottom wall blocking us
+            if self._cells[i + di][j + dj].visited:
+                continue # we've been here before, try next direction
+            self._cells[i][j].draw_move(self._cells[i + di][j + dj])
+            if self._solve_r(i + di, j + dj):
+                return True
+            self._cells[i][j].draw_move(self._cells[i + di][j + dj], undo=True)
+        return False
+        

@@ -1,3 +1,4 @@
+from time import sleep
 from window import Window
 from shapes import Line, Point
 from cell import Cell
@@ -13,14 +14,15 @@ seed = int.from_bytes(os.urandom(8), 'big')
 
 def main():
     win = Window(800,600)
-    c_w = 20
-    c_h = 20
+    c_w = 25
+    c_h = 25
     
     if draw_test_maze:
-        maze = Maze(20, 20, 25, 35, c_w, c_h, win, seed)
+        maze = Maze(20, 20, 22, 30, c_w, c_h, win, seed)
         maze._draw_cells()
         maze._break_entrance_and_exit()
         maze._break_walls()
+        maze._solve()
     
     if draw_some_cells:
         cell = Cell(50, 50, 150, 150, win)
